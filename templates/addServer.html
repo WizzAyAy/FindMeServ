@@ -13,6 +13,10 @@
                    placeholder="17015">
             <small id="portHelp" class="form-text text-muted">The port is the part after the ':'</small>
         </div>
+        <div class="form-group mb-2">
+            <label for="host">Server's host</label>
+            <input type="text" class="form-control" id="host">
+        </div>
         <select class="form-control mb-4">
             {% for key, value in types %}
                 <option value="{{ key }}">{{ value }}</option>
