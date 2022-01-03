@@ -12,11 +12,12 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
 
+    {# FontAwsome #}
     <script src="https://kit.fontawesome.com/4b4d568cd7.js" crossorigin="anonymous"></script>
 
 </head>
 
-<body>
+<body style="height: 100%">
 {% block navbar %}
     <div style="background-color: lightblue; margin-bottom: 15px">
         <nav class="navbar navbar-light bg-light">
@@ -48,38 +49,34 @@
 {% endblock %}
 
 {% block footer %}
-    <footer class="bg-light text-center text-white">
+    <footer class="bg-light text-white navbar fixed-bottom container-fluid">
         <!-- Grid container -->
-        <div class="container p-1 pb-0 mb-0">
+        <div class="row">
             <!-- Section: Social media -->
             <!-- Github -->
             <a
                     class="btn btn-primary btn-floating m-2"
                     style="background-color: #333333;"
-                    href="https://pubmed.ncbi.nlm.nih.gov/"
-                    role="button"
-            ><i class="fas fa-university"></i
-            ></a>
-            <!-- Pubmed -->
-            <a
-                    class="btn btn-primary btn-floating m-2"
-                    style="background-color: #333333;"
-                    href="https://github.com/WizzAyAy/DjangoProject"
+                    href="https://github.com/WizzAyAy/FindMeServ/tree/main"
                     role="button"
             ><i class="fab fa-github"></i
             ></a>
-            <!-- Section: Social media -->
+            <!-- Discord -->
+            <a
+                    class="btn btn-primary btn-floating m-2"
+                    style="background-color: #333333;"
+                    href="https://discord.gg/8K5d5JzSw2"
+                    role="button"
+            ><i class="fab fa-discord"></i
+            ></a>
         </div>
         <!-- Grid container -->
 
         <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        <div class="row text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
             ©
             <script>document.write(/\d{4}/.exec(Date())[0])</script>
             Copyright
-            <br>
-            <a class="text-white" href="https://www.univ-angers.fr/fr/index.html/">Contact</a>
-            | <a class="text-white" href="https://uatalents.univ-angers.fr/mentions-legales/">Mention legal</a>
         </div>
         <!-- Copyright -->
     </footer>
