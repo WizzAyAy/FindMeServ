@@ -13,6 +13,7 @@ class Server(models.Model):
 
     ip = models.CharField(max_length=30)
     port = models.CharField(max_length=10)
+    host = models.CharField(max_length=30)
 
     gamemode = models.CharField(
         max_length=2,
