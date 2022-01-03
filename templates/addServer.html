@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    <form class="m-5">
+        <div class="form-group mb-2">
+            <label for="ip">Server's Ip</label>
+            <input type="text" class="form-control" id="ip" aria-describedby="ipHelp"
+                   placeholder="127.0.0.1">
+            <small id="ipHelp" class="form-text text-muted">The ip is the part before the ':'</small>
+        </div>
+        <div class="form-group mb-2">
+            <label for="port">Server's port</label>
+            <input type="text" class="form-control" id="port" aria-describedby="portHelp"
+                   placeholder="17015">
+            <small id="portHelp" class="form-text text-muted">The port is the part after the ':'</small>
+        </div>
+        <select class="form-control mb-4">
+            {% for key, value in types %}
+                <option value="{{ key }}">{{ value }}</option>
+            {% endfor %}
+
+        </select>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+
+{% endblock %}
