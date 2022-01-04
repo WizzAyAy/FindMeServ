@@ -1,3 +1,5 @@
+import traceback
+
 from django.shortcuts import render
 from FindMeServ.models import Server
 import a2s
@@ -23,8 +25,23 @@ def add_server(request):
     logger.error(host)
     logger.error(gamemode)
 
+
+    try:
+        Server.objects.create(
+            ip=ip,
+            port=port,
+            host=host,
+            gamemode=gamemode
+        )
+        add_server_statement = (True, "The server has been added to the database")
+    except Exception:
+        logging.error(traceback.format_exc())
+        add_server_statement = (False, "Impossible to add the server")
+
     types = Server.ServerType.choices
-    context = {'types': types}
+
+    logger.error(type(add_server_statement))
+    context = {'types': types, 'add_server_statement': add_server_statement}
     return render(request, '../templates/addServer.html', context)
 
 

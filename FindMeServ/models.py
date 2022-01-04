@@ -11,13 +11,16 @@ class Server(models.Model):
         KZ = 'KZ', _('Kz')
         OTHER = 'OT', _('Other')
 
-    ip = models.CharField(max_length=30)
-    port = models.CharField(max_length=10)
-    host = models.CharField(max_length=30)
+    ip = models.CharField(max_length=30, null=False)
+    port = models.IntegerField(null=False)
+    host = models.CharField(max_length=30, null=False)
 
     gamemode = models.CharField(
         max_length=2,
         choices=ServerType.choices,
         default=ServerType.OTHER,
     )
+
+    class Meta:
+        unique_together = ("ip", "port",)
 

@@ -1,5 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
+
+    <!-- Server added -->
+    {% if  add_server_statement.0 %}
+        <div class="alert alert-success" role="alert">
+            {{ add_server_statement.1 }}
+        </div>
+    {% endif %}
+
+    <!-- Server not added -->
+    {% if  add_server_statement.0 == False %}
+        <div class="alert alert-warning" role="alert">
+            {{ add_server_statement.1 }}
+        </div>
+    {% endif %}
+
     <form action="{% url 'FindMeServ:addServer' %}" method="post" class="m-5">
         {% csrf_token %}
         <!-- IP -->
@@ -29,11 +44,8 @@
             </select>
         </div>
 
-        <button type="submit button" class="btn btn-primary">
-            <i class="bi-plus-square text-light"></i>Add
-        </button>
-        <button type="button" class="btn btn-danger">
-            <i class="bi bi-trash text-light"></i> Delete
+        <button type="submit" class="btn btn-primary">
+            Add Server
         </button>
     </form>
 {% endblock %}
