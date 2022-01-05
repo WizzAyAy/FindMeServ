@@ -9,12 +9,14 @@
 {% block js %}
     <script>
         let static_url = "{% get_static_prefix %}";
+        let servers = {{ servers|safe }}
     </script>
+
     <script type="text/javascript" src="{% static 'FindMeServ/js/card.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-{{ info }}
-    <div class="d-flex flex-wrap justify-content-evenly" id="container-server"></div>
+
+    <div class="d-flex flex-wrap" id="container-server"></div>
 
 {% endblock %}

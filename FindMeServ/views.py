@@ -25,7 +25,6 @@ def add_server(request):
     logger.error(host)
     logger.error(gamemode)
 
-
     try:
         Server.objects.create(
             ip=ip,
@@ -33,10 +32,10 @@ def add_server(request):
             host=host,
             gamemode=gamemode
         )
-        add_server_statement = (True, "The server has been added to the database")
+        add_server_statement = (True, 'The server has been added to the database')
     except Exception:
         logging.error(traceback.format_exc())
-        add_server_statement = (False, "Impossible to add the server")
+        add_server_statement = (False, 'Impossible to add the server')
 
     types = Server.ServerType.choices
 
@@ -45,9 +44,29 @@ def add_server(request):
     return render(request, '../templates/addServer.html', context)
 
 
-def test(request):
-    address = ("145.239.5.44", 27015)
-    info = a2s.info(address)
-    players = a2s.players(address)
-    context = {'info': info, 'players': players}
-    return render(request, '../templates/hello.html', context)
+
+def server_list(request):
+    servers = Server.objects.all()
+    servers_to_send = []
+    for server in servers:
+        info = get_server_info(server)
+        servers_to_send.append({
+            'ip': server.get_ip(),
+            'port': server.get_port(),
+            'map': info.map_name,
+            'player': info.player_count,
+            'max_player': info.max_players,
+            'gamemode': server.get_gamemode_display(),
+            'host': server.get_host(),
+            'name': info.server_name,
+        })
+
+    logger.error(servers_to_send)
+    context = {'servers': servers_to_send}
+    return render(request, '../templates/serverList.html', context)
+
+
+# TODO parallel
+def get_server_info(server):
+    address = (server.get_ip(), server.get_port())
+    return a2s.info(address)

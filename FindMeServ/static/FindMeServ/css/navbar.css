@@ -1,0 +1,16 @@
+.nav-link {
+  display: inline-block;
+}
+
+.nav-link::after {
+  content: '';
+  width: 0px;
+  height: 1px;
+  display: block;
+  background: black;
+  transition: 300ms;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}

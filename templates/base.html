@@ -21,6 +21,9 @@
     />
 
     {% block css %}{% endblock %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'FindMeServ/css/navbar.css' %}"/>
+
     {% block js %}{% endblock %}
 
 </head>
@@ -41,10 +44,7 @@
                             <a class="nav-link" href="/add-server-form">Add new servers</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/information/generateNewPapers">Get new papers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/paper/graph">Graph on papers</a>
+                            <a class="nav-link" href="/server-list">server List</a>
                         </li>
                     </ul>
                 </div>
