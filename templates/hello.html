@@ -1,6 +1,20 @@
 {% extends "base.html" %}
+
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'FindMeServ/css/card.css' %}"/>
+{% endblock %}
+
+{% block js %}
+    <script>
+        let static_url = "{% get_static_prefix %}";
+    </script>
+    <script type="text/javascript" src="{% static 'FindMeServ/js/card.js' %}"></script>
+{% endblock %}
+
 {% block content %}
-    <p>{{ info }}</p>
-    <p>{{ players }}</p>
-    <p>{{ rules }}</p>
+{{ info }}
+    <div class="d-flex flex-wrap justify-content-evenly" id="container-server"></div>
+
 {% endblock %}
