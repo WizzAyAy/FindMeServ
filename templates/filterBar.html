@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<form action="{% url 'FindMeServ:serverList' %}" method="post">
+    {% csrf_token %}
+
+    <!-- GAMEMODE -->
+    <div class="row form-group mb-2 me-5">
+        <label class="col-sm-2 col-form-label" for="gamemode">Gamemode</label>
+        <select name="gamemode" id="gamemode" class="col custom-select form-control">
+            <option value="None">Pick a GameMode</option>
+            {% for key, value in types %}
+                <option {% if gamemode == key %}selected{% endif %} value="{{ key }}">{{ value }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- HOST -->
+    <div class="row form-group mb-2 me-5">
+        <label class="col-sm-2 col-form-label" for="host">Host</label>
+        <input name="host" id="host" class="col form-control" value="{{ host }}">
+    </div>
+
+    <!-- EMPTY SERVER -->
+    <div class="row justify-content-end mb-2">
+        <div class="col-2 form-group form-switch">
+            <input name="empty" class="form-check-input" type="checkbox" id="switchEmpty" {% if empty == "on" %}checked{% endif %}>
+            <label class="form-check-label" for="switchEmpty">View Empty Servers</label>
+        </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="row justify-content-end mb-2 me-5">
+        <button type="submit" class="col-1 btn btn-primary">
+            Filter
+        </button>
+    </div>
+</form>

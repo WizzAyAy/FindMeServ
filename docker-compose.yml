@@ -1,0 +1,16 @@
+web:
+  build: .
+  environment:
+    MYENV: FindMeServ
+  volumes:
+    - .:/app
+web_migrate:
+  extends:
+    service: web
+  command: python manage.py migrate
+web_run:
+  extends:
+    service: web
+  command: python manage.py runserver 0.0.0.0:8090
+  ports:
+    - "8090:8090"
