@@ -18,3 +18,31 @@
 #card:hover {
     box-shadow: 0px 0px 8px 0px #000000;
 }
+
+#players_list {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: white;
+    border: solid 1px black;
+    min-width: 60%;
+    max-height: 75%;
+}
+
+#toast {
+    border-radius: 20px;
+    border: solid 1px #1b1b1b;
+
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: auto;
+
+    background-color: red;
+}
+
+#toast-text {
+    margin: 10px;
+    float: right;
+}

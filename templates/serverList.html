@@ -18,13 +18,19 @@
 
 {% block content %}
 
-    <div class="container-fluid">
+    <div class="overflow-auto position-fixed visually-hidden" style="z-index: 10" id="players_list"></div>
+
+    <div class="container-fluid user-select-none">
         <div class="row">{% include "filterBar.html" %}</div>
-        <div class="row" id="container-server"></div>
+        <div class="row justify-content-evenly" id="container-server"></div>
     </div>
 
     {% csrf_token %}
-    <input id="ajax-call" type="submit" value="go">
-    <p id="ajax"></p>
+
+
+    <div id="toast" class="bg-light user-select-none visually-hidden" onclick="closeToast()">
+        <div id="toast-text">This server is currently empty<i class="fas fa-times ms-2"></i></div>
+    </div>
+
 
 {% endblock %}

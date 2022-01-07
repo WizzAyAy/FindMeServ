@@ -51,10 +51,10 @@ def server_list(request):
 
     servers = Server.objects.all()
 
-    if host != "":
+    if host != '':
         servers = servers.filter(host=host)
 
-    if gamemode != "None":
+    if gamemode != 'None':
         servers = servers.filter(gamemode=gamemode)
 
     servers_to_send = []
@@ -92,31 +92,43 @@ def get_server_info(server):
 
 
 def get_players_info(request):
-    address = request.POST.get('ip') + ':' + request.POST.get('port')
-    logger.error(address)
+    ip = request.POST.get('ip')
+    port = request.POST.get('port')
+
     try:
+        address = (ip, int(port))
         players = a2s.players(address)
     except Exception:
-        players = None
-    return JsonResponse({"players": players})
+        return JsonResponse({'players': None})
+
+    players_array = []
+    for player in players:
+        players_array.append({
+            'name': player.name,
+            'score': player.score,
+            'duration': int(player.duration)
+        })
+
+    return JsonResponse({'players': players_array})
 
 
 def extract_server_info(server, empty, result, index):
     info = get_server_info(server)
 
-    if (info is None) or (int(info.player_count) == 0 and empty is "None"):
+    if (info is None) or (int(info.player_count) == 0 and empty == 'None'):
         result[index] = None
         return
 
-    server_rank_re = re.search(r"#[0-9]+", info.server_name)
+    server_rank_re = re.search(r'#[0-9]+', info.server_name)
     server_rank = 0
     if type(server_rank_re) != NoneType:
         server_rank = int(server_rank_re.group(0).replace('#', ''))
+
     result[index] = {
         'ip': server.get_ip(),
         'port': server.get_port(),
         'map': info.map_name,
-        'player': info.player_count,
+        'player': info.player_count + info.bot_count,
         'max_player': info.max_players,
         'gamemode': server.get_gamemode_display(),
         'host': server.get_host(),

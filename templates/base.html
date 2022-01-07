@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>{% block title %}DjangoWebSite{% endblock %}</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'FindMeServ/favicon/favicon.png' %}"/>
+
+    <title>{% block title %}FindMeServ{% endblock %}</title>
 
     {# Load the tag library #}
     {% load bootstrap5 %}
@@ -28,10 +31,10 @@
 
 </head>
 
-<body style="margin-bottom: 150px">
+<body style="margin-bottom: 150px; margin-top: 70px">
 {% block navbar %}
-    <div style="background-color: lightblue; margin-bottom: 15px">
-        <nav class="navbar navbar-light bg-light">
+    <div>
+        <nav class="navbar fixed-top navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/" style="color:grey;">Find Me Serv</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -57,7 +60,7 @@
 {% endblock %}
 
 {% block footer %}
-    <footer class="bg-light text-white fixed-bottom container-fluid">
+    <footer class="text-white fixed-bottom container-fluid" style="background-color: #cccccc">
         <!-- Grid container -->
         <div class="row">
             <div class="center-block text-center">
@@ -83,8 +86,8 @@
         <!-- Grid container -->
 
         <!-- Copyright -->
-        <div class="row" style="background-color: rgba(0, 0, 0, 0.2);">
-            <div class="center-block text-center">
+        <div class="row bg-light">
+            <div class="center-block text-center text-secondary">
                 ©
                 <script>document.write(/\d{4}/.exec(Date())[0])</script>
                 1D5A's Team Copyright
