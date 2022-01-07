@@ -10,6 +10,7 @@ urlpatterns = [
     path('server-list/', views.server_list, name='serverList'),
     path('add-server/', views.add_server, name='addServer'),
     path('add-server-form/', views.add_server_form, name='addServerForm'),
+    path('get-players-info/', views.get_players_info, name='getPlayersInfo'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

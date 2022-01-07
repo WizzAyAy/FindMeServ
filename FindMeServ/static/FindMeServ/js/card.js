@@ -26,7 +26,7 @@ function addCard(map, gamemode, ip, port, players, maxPlayers, host, name) {
     nameText.classList.add("justify-content-center")
     nameText.classList.add("card-title")
     nameText.classList.add("text-truncate")
-    nameText.style.fontSize  = "small"
+    nameText.style.fontSize = "small"
     nameText.setAttribute('data-bs-toggle', 'tooltip')
     nameText.setAttribute('title', name)
     nameText.innerText = name
@@ -111,5 +111,23 @@ function addCard(map, gamemode, ip, port, players, maxPlayers, host, name) {
 window.onload = function () {
     servers.forEach(function (server) {
         addCard(server.map, server.gamemode, server.ip, server.port, server.player, server.max_player, server.host, server.name)
+    })
+
+    document.querySelector("#ajax-call").addEventListener("click", event => {
+        event.preventDefault();
+        let formData = new FormData()
+        formData.append('ip', "145.239.5.44")
+        formData.append('port', "27015")
+        let csrfTokenValue = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        const request = new Request("/get-players-info/", {
+            method: 'POST',
+            body: formData,
+            headers: {'X-CSRFToken': csrfTokenValue}
+        })
+        fetch(request)
+            .then(response => response.json())
+            .then(result => {
+                console.log(result);
+            })
     })
 }

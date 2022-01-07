@@ -23,4 +23,8 @@
         <div class="row" id="container-server"></div>
     </div>
 
+    {% csrf_token %}
+    <input id="ajax-call" type="submit" value="go">
+    <p id="ajax"></p>
+
 {% endblock %}
