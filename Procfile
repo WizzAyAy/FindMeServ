@@ -1,1 +1,1 @@
-web: gunicorn findMeServ.wsgi --log-file -
+web: gunicorn findMeServ.wsgi --log-file=-
