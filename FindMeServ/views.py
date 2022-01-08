@@ -52,10 +52,7 @@ def server_list(request):
     empty = request.POST.get('empty', 'None')
     host = request.POST.get('host', '')
     gamemode = request.POST.get('gamemode', 'None')
-
     maps = get_map_list(request)
-
-    logger.error(maps)
 
     servers = Server.objects.all()
 
@@ -104,6 +101,7 @@ def get_server_info(server):
     try:
         return a2s.info(address, timeout=0.2)
     except Exception:
+        logger.error(server.get_id())
         return None
 
 
@@ -131,8 +129,8 @@ def get_players_info(request):
 def extract_server_info(server, empty, maps, result, index):
     info = get_server_info(server)
 
-    if (info is None) or\
-            (int(info.player_count) == 0 and empty == 'None') or\
+    if (info is None) or \
+            (int(info.player_count) == 0 and empty == 'None') or \
             ('all' not in maps and info.map_name not in maps):
         result[index] = None
         return

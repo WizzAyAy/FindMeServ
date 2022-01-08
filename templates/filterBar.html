@@ -9,27 +9,37 @@
 <form action="{% url 'FindMeServ:serverList' %}" method="post">
     {% csrf_token %}
 
-    <!-- GAMEMODE -->
-    <div class="row form-group mb-2 me-5">
-        <label class="col-sm-2 col-form-label" for="gamemode">Gamemode</label>
-        <select name="gamemode" id="gamemode" class="col custom-select form-control">
-            <option value="None">Pick a GameMode</option>
-            {% for key, value in types %}
-                <option {% if gamemode == key %}selected{% endif %} value="{{ key }}">{{ value }}</option>
-            {% endfor %}
-        </select>
-    </div>
 
-    <!-- HOST -->
-    <div class="row form-group mb-2 me-5">
-        <label class="col-sm-2 col-form-label" for="host">Host</label>
-        <input name="host" id="host" class="col form-control" value="{{ host }}">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <!-- GAMEMODE -->
+            <div class="col">
+                <div class="form-floating">
+                    <select name="gamemode" class="form-select" id="gamemodeSelect" aria-label="Floating label select">
+                        <option value="None">All game modes</option>
+                        {% for key, value in types %}
+                            <option {% if gamemode == key %}selected{% endif %} value="{{ key }}">{{ value }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="gamemodeSelect">Select a Game Mode</label>
+                </div>
+            </div>
+            <!-- HOST -->
+            <div class="col">
+                <div class="form-floating">
+                    <input name="host" type="text" class="form-control" id="host" placeholder="Warmup"
+                           {% if host != '' %}value="{{ host }}"{% endif %}>
+                    <label for="host">Filter hosts :</label>
+                </div>
+            </div>
+        </div>
     </div>
 
 
     <!-- MAPS -->
     <div class="container-fluid user-select-none">
         <div class="row justify-content-between">
+            <div style="max-width: fit-content" class="mb-2"><span class="align-middle">Pick your maps :</span></div>
             {% for map in maps %}
                 <div style="max-width: fit-content" class="mb-2">
                     <input name="{{ map }}" type="checkbox" class="btn-check" id="map_{{ map }}"

@@ -30,8 +30,9 @@
     {% block js %}{% endblock %}
 
 </head>
+<body style="margin-bottom: 100px; margin-top: 70px;">
 
-<body style="margin-bottom: 150px; margin-top: 70px; max-width: fit-content">
+{% csrf_token %}
 {% block navbar %}
     <div>
         <nav class="navbar fixed-top navbar-light bg-light">

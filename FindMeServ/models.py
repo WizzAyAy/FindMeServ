@@ -35,3 +35,6 @@ class Server(models.Model):
 
     def get_gamemode(self):
         return self.gamemode
+
+    def get_id(self):
+        return self.id
