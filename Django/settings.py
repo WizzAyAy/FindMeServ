@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'FindMeServ.apps.FindmeservConfig',
-    'bootstrap5'
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
