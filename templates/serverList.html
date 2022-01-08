@@ -8,9 +8,8 @@
 
 {% block js %}
     <script>
-        let static_url = "{% get_static_prefix %}";
-        let servers =
-        {{ servers|safe }}
+        let static_url = "{% get_static_prefix %}"
+        let servers = {{ servers|safe }};
     </script>
 
     <script type="text/javascript" src="{% static 'FindMeServ/js/card.js' %}"></script>
@@ -18,16 +17,21 @@
 
 {% block content %}
 
+    {#  Pop up players  #}
     <div class="overflow-auto position-fixed visually-hidden" style="z-index: 10" id="players_list"></div>
 
+    {#  Filter bar  #}
+    <div class="border-bottom border-2">{% include 'filterBar.html' %}</div>
+
+    {#  Grid Servers  #}
     <div class="container-fluid user-select-none">
-        <div class="row">{% include "filterBar.html" %}</div>
         <div class="row justify-content-evenly" id="container-server"></div>
     </div>
 
     {% csrf_token %}
 
 
+    {#  Toast empty servers  #}
     <div id="toast" class="bg-light user-select-none visually-hidden" onclick="closeToast()">
         <div id="toast-text">This server is currently empty<i class="fas fa-times ms-2"></i></div>
     </div>
