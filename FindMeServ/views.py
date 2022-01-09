@@ -1,6 +1,5 @@
 import traceback
 from enum import Enum
-from types import NoneType
 
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -136,9 +135,11 @@ def extract_server_info(server, empty, maps, result, index):
         return
 
     server_rank_re = re.search(r'#[0-9]+', info.server_name)
-    server_rank = 0
-    if type(server_rank_re) != NoneType:
+
+    try:
         server_rank = int(server_rank_re.group(0).replace('#', ''))
+    except Exception:
+        server_rank = 0
 
     result[index] = {
         'ip': server.get_ip(),
