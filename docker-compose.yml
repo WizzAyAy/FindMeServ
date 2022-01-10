@@ -4,6 +4,7 @@ web:
     MYENV: FindMeServ
   volumes:
     - .:/app
+  restart: always 
 web_migrate:
   extends:
     service: web
