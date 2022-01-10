@@ -4,14 +4,16 @@ web:
     MYENV: FindMeServ
   volumes:
     - .:/app
-  restart: always 
+  restart: always
 web_migrate:
   extends:
     service: web
   command: python manage.py migrate
+  restart: always
 web_run:
   extends:
     service: web
   command: python manage.py runserver 0.0.0.0:80
+  restart: always
   ports:
     - "80:80"
