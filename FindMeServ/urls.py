@@ -9,7 +9,6 @@ sys.path.append(os.path.abspath("views"))
 app_name = 'FindMeServ'
 
 urlpatterns = [
-    path('', views.home, name='home'),
     path('server-list/', views.server_list, name='serverList'),
     path('get-players-info/', views.get_players_info, name='getPlayersInfo'),
 

@@ -9,7 +9,7 @@ from .serverUtils import *
 def add_server_form(request):
     types = Server.ServerType.choices
     context = {'types': types}
-    return render(request, '../templates/addServer.html', context)
+    return render(request, '../templates/servers/addServer.html', context)
 
 
 def add_server(request):
@@ -34,4 +34,4 @@ def add_server(request):
         add_server_statement = (False, 'Impossible to add the server')
 
     context = {'types': Server.ServerType.choices, 'add_server_statement': add_server_statement}
-    return render(request, '../templates/addServer.html', context)
+    return render(request, '../templates/servers/addServer.html', context)

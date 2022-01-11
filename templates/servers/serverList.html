@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base/base.html" %}
 
 {% load static %}
 
@@ -21,7 +21,7 @@
     <div class="overflow-auto position-fixed visually-hidden" style="z-index: 10" id="players_list"></div>
 
     {#  Filter bar  #}
-    <div class="border-bottom border-2">{% include 'filterBar.html' %}</div>
+    <div class="border-bottom border-2">{% include 'servers/filterBar.html' %}</div>
 
     {#  Grid Servers  #}
     <div class="container-fluid user-select-none">

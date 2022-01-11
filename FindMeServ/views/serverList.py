@@ -45,7 +45,7 @@ def server_list(request):
 
     context = {'servers': servers_to_send, 'types': Server.ServerType.choices, 'empty': empty, 'host': host,
                'gamemode': gamemode, 'maps': Map.__members__, 'maps_checked': maps}
-    return render(request, '../templates/serverList.html', context)
+    return render(request, '../templates/servers/serverList.html', context)
 
 
 def get_map_list(request):
