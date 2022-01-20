@@ -28,7 +28,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '0.0.0.0',
     '40.89.128.123',
-    'findmeserv.francecentral.cloudapp.azure.com/'
+    'findmeserv.francecentral.cloudapp.azure.com'
 ]
 
 # Application definition
