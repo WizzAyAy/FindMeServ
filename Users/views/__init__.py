@@ -1,6 +1,6 @@
 import logging
 
-from django.contrib.auth import authenticate, logout as logout_request
+from django.contrib.auth import authenticate, login as login_django, logout as logout_django
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
@@ -17,23 +17,25 @@ def login(request):
         logger.error(username)
         logger.error(password)
 
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(authenticate, username=username, password=password)
 
         if user is not None:
-            context = {'login_success': False}
-        else:
+            login_django(request, user)
             context = {'login_success': True}
+            template = '../templates/base/base.html'
+        else:
+            context = {'login_success': False}
+            template = '../templates/users/login.html'
 
-    logger.error(request.user.is_authenticated)
-    return render(request, '../templates/users/login.html', context)
+    return render(request, template, context)
 
 
 @login_required
 def logout(request):
-    logout_request(request)
-    return render(request, '../templates/base/base.html')
+    logout_django(request)
+    context = {'logout_success': True}
+    return render(request, '../templates/base/base.html', context)
 
 
 def home(request):
-    logger.error(request.user.is_authenticated)
     return render(request, '../templates/base/base.html')

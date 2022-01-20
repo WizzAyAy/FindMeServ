@@ -1,0 +1,17 @@
+{% if login_success %}
+    <div class="alert alert-success" role="alert">
+        You are now connected
+    </div>
+{% endif %}
+
+{% if  login_success == False %}
+    <div class="alert alert-warning" role="alert">
+        Your credential doesn't match our database
+    </div>
+{% endif %}
+
+{% if logout_success %}
+    <div class="alert alert-danger" role="alert">
+        You have been disconnected
+    </div>
+{% endif %}
