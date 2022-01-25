@@ -2,10 +2,12 @@ import traceback
 
 from FindMeServ.models import Server
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 from .serverUtils import *
 
 
+@login_required
 def add_server(request):
     if request.method == 'GET':
         types = Server.ServerType.choices
@@ -23,7 +25,8 @@ def add_server(request):
                 ip=ip,
                 port=port,
                 host=host,
-                gamemode=gamemode
+                gamemode=gamemode,
+                owner=request.user
             )
             if get_server_info(server) is None:
                 server.delete()

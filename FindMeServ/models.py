@@ -1,5 +1,7 @@
 from django.utils.translation import gettext_lazy as _
 from django.db import models
+from django.conf import settings
+from django.contrib.auth.models import User
 
 
 class Server(models.Model):
@@ -21,6 +23,11 @@ class Server(models.Model):
         default=ServerType.OTHER,
     )
 
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+
     class Meta:
         unique_together = ("ip", "port",)
 
@@ -35,6 +42,9 @@ class Server(models.Model):
 
     def get_gamemode(self):
         return self.gamemode
+
+    def get_owner(self):
+        return User.objects.get(id=self.owner)
 
     def get_id(self):
         return self.id
