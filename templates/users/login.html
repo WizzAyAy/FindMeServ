@@ -1,20 +1,6 @@
 {% extends "base/base.html" %}
 {% block content %}
 
-    <!-- Server added -->
-    {% if login_success %}
-        <div class="alert alert-success" role="alert">
-            You are now connected
-        </div>
-    {% endif %}
-
-    <!-- Server not added -->
-    {% if  login_success == False %}
-        <div class="alert alert-warning" role="alert">
-            Your credential doesn't match our database
-        </div>
-    {% endif %}
-
     <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
