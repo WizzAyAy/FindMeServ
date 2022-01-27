@@ -1,3 +1,5 @@
+from django.contrib.auth import get_user_model
+
 from FindMeServ.models import Server
 from threading import Thread
 from django.shortcuts import render
@@ -10,11 +12,17 @@ logger = logging.getLogger('serverList')
 
 def server_list(request):
     empty = request.POST.get('empty', 'None')
+    owned = request.POST.get('owned', 'None')
     host = request.POST.get('host', '')
     gamemode = request.POST.get('gamemode', 'None')
     maps = get_map_list(request)
 
-    servers = Server.objects.all()
+    user_model = get_user_model()
+    users_admin = user_model.objects.all().filter(is_staff=True)
+    servers = Server.objects.all().filter(owner__in=users_admin)
+
+    if owned != 'None' and request.user.is_authenticated:
+        servers = servers.filter(owner=request.user)
 
     if host != '':
         servers = servers.filter(host=host)
@@ -43,8 +51,16 @@ def server_list(request):
 
     servers_to_send = sorted(servers_to_send, key=lambda d: d['server_rank'])
 
-    context = {'servers': servers_to_send, 'types': Server.ServerType.choices, 'empty': empty, 'host': host,
-               'gamemode': gamemode, 'maps': Map.__members__, 'maps_checked': maps}
+    context = {
+        'servers': servers_to_send,
+        'types': Server.ServerType.choices,
+        'empty': empty,
+        'owned': owned,
+        'host': host,
+        'gamemode': gamemode,
+        'maps': Map.__members__,
+        'maps_checked': maps
+    }
     return render(request, '../templates/servers/serverList.html', context)
 
 

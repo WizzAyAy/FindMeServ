@@ -10,9 +10,10 @@ logger = logging.getLogger('server utils')
 def get_server_info(server):
     address = (server.get_ip(), server.get_port())
     try:
-        return a2s.info(address, timeout=0.2)
-    except Exception:
-        logger.error(server.get_id())
+        return a2s.info(address, timeout=0.5)
+    except Exception as e:
+        logger.error("Server " + str(server.get_id()) + " (" + str(server.get_ip()) + ":" + str(
+            server.get_port()) + ") timed out")
         return None
 
 

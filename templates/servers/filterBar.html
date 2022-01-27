@@ -63,6 +63,15 @@
                 </button>
             </div>
 
+            <!-- OWNED SERVER -->
+            {% if user.is_authenticated %}
+                <div class="col-2">
+                    <input name="owned" type="checkbox" class="btn-check" id="owned"
+                           {% if owned == "on" %}checked{% endif %} autocomplete="off">
+                    <label class="btn btn-outline-secondary w-100" for="owned">View Only Owned Servers</label><br>
+                </div>
+            {% endif %}
+
             <!-- EMPTY SERVER -->
             <div class="col-2">
                 <input name="empty" type="checkbox" class="btn-check" id="empty"
