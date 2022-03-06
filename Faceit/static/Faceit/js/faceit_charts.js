@@ -23,8 +23,8 @@ function populateCharts(response) {
     let div = document.createElement('div_tmp')
     div.id = 'div_tmp'
 
-    let canvas1 = createCanvas('100%', '31%')
-    let canvas2 = createCanvas('100%', '31%')
+    let canvas1 = createCanvas('100%', '27%')
+    let canvas2 = createCanvas('100%', '27%')
 
     div.appendChild(canvas1)
     div.appendChild(canvas2)
