@@ -1,4 +1,4 @@
-function add_players_list(response) {
+function addPlayersList(response) {
     if (response['players'].length == 0) {
         showToast()
         return
@@ -60,11 +60,11 @@ function addCard(map, gamemode, ip, port, players, maxPlayers, host, name) {
     cardDiv.onclick = function (event) {
         closeToast()
         // prevent open list if click join
-        if(event.target.nodeName == 'A') return
+        if (event.target.nodeName == 'A') return
         let formData = new FormData()
         formData.append('ip', ip)
         formData.append('port', port)
-        let csrfTokenValue = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        let csrfTokenValue = document.querySelector('[name=csrfmiddlewaretoken]').value
         const request = new Request('/get-players-info/', {
             method: 'POST',
             body: formData,
@@ -73,7 +73,7 @@ function addCard(map, gamemode, ip, port, players, maxPlayers, host, name) {
         fetch(request)
             .then(response => response.json())
             .then(response => {
-                add_players_list(response)
+                addPlayersList(response)
             })
     }
 
@@ -189,7 +189,6 @@ window.onload = function () {
         addCard(server.map, server.gamemode, server.ip, server.port, server.player, server.max_player, server.host, server.name)
     })
 
-
     document.onclick = function (event) {
         let playersListDiv = document.getElementById('players_list')
         if (!htmlElementClicked(event, 'players_list')) {
@@ -213,10 +212,10 @@ function imageExists(image_url) {
     return http.status != 404
 }
 
-function htmlElementClicked(event, id){
+function htmlElementClicked(event, id) {
     let clickPlayersListDiv = false
-        for (let indexElement in event['path']) {
-            if (event['path'][indexElement].id == id) clickPlayersListDiv = true
-        }
+    for (let indexElement in event['path']) {
+        if (event['path'][indexElement].id == id) clickPlayersListDiv = true
+    }
     return clickPlayersListDiv
 }

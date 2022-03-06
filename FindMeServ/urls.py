@@ -1,10 +1,6 @@
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-import os
-import sys
 from . import views
-
-sys.path.append(os.path.abspath("views"))
 
 app_name = 'FindMeServ'
 

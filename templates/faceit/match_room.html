@@ -1,0 +1,35 @@
+{% extends "base/base.html" %}
+
+{% load static %}
+
+{% block js %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+
+    <script>
+        let stats_team_1 = "{{ stats_team_1|safe }}";
+    </script>
+
+    <script type="text/javascript" src="{% static 'Faceit/js/faceit_charts.js' %}"></script>
+
+{% endblock %}
+
+{% block content %}
+    {% csrf_token %}
+    <div class="container">
+
+        <!-- Room id -->
+        <div class="input-group mb-3">
+            <input name="id" type="text" class="form-control" id="room_id"
+                    {#                       {% if id %}value="{{ id }}" {% endif %}#}
+                   value="1-e5210c42-4bc1-4a59-ade8-3fe884bca1fb"
+                   placeholder="faceit room id"
+                   aria-describedby="submit">
+            <button type="button" class="btn btn-outline-secondary" id="submit" onclick="generateCharts()">
+                Find this room
+            </button>
+        </div>
+
+        <div id="charts"></div>
+    </div>
+{% endblock %}
