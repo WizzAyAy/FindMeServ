@@ -1,6 +1,5 @@
 function generateCharts() {
     let room_id = document.getElementById('room_id').value
-    console.log(room_id)
     let formData = new FormData()
     formData.append('room_id', room_id)
     let csrfTokenValue = document.querySelector('[name=csrfmiddlewaretoken]').value
@@ -19,11 +18,18 @@ function generateCharts() {
 function populateCharts(response) {
     let chartsDiv = document.getElementById('charts')
 
-    let canvas1 = createCanvas(1,1)
-    let canvas2 = createCanvas(1,1)
+    document.getElementById('div_tmp')?.remove()
 
-    chartsDiv.appendChild(canvas1)
-    chartsDiv.appendChild(canvas2)
+    let div = document.createElement('div_tmp')
+    div.id = 'div_tmp'
+
+    let canvas1 = createCanvas('100%', '31%')
+    let canvas2 = createCanvas('100%', '31%')
+
+    div.appendChild(canvas1)
+    div.appendChild(canvas2)
+
+    chartsDiv.append(div)
 
     createChart(canvas1.getContext('2d'), response.stats_team_1)
     createChart(canvas2.getContext('2d'), response.stats_team_2)
@@ -74,12 +80,6 @@ function createChart(canvas, team_info) {
             datasets: datasets,
         },
         options: {
-            interaction: {
-                mode: 'index',
-                intersect: false,
-            },
-            stacked: false,
-            responsive: true,
             scales: {
                 'y-axis-wr': {
                     id: '',
@@ -93,8 +93,9 @@ function createChart(canvas, team_info) {
                     id: '',
                     position: 'right',
                     type: 'linear',
+                    min: 0,
                     grid: {
-                        drawOnChartArea: false, // only want the grid lines for one axis to show up
+                        drawOnChartArea: false,
                     },
                 },
             },
